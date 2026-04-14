@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # CITS5505-Individual-Project
+=======
+# CITS5505 Individual Project
+>>>>>>> fc9036d (Update tutorial, quiz reward APIs, reflection references, and CV contact details)
 
 A multi-page static web project for CITS5505 covering:
 
