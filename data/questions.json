@@ -1,0 +1,127 @@
+[
+  {
+    "question": "What does HTML stand for?",
+    "options": [
+      "Hyper Trainer Marking Language",
+      "Hyper Text Markup Language",
+      "Hyper Text Marketing Language",
+      "Hyper Tool Markup Language"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What does CSS stand for?",
+    "options": [
+      "Computer Styled Sections",
+      "Cascading Style Sheets",
+      "Creative Style System",
+      "Centralized Style Syntax"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which language is used for styling websites?",
+    "options": ["HTML", "CSS", "Python", "C++"],
+    "answer": 1
+  },
+  {
+    "question": "Which HTML element should you normally use for a clickable action?",
+    "options": ["<div>", "<span>", "<button>", "<section>"],
+    "answer": 2
+  },
+  {
+    "question": "Which landmark element typically contains the primary navigation links?",
+    "options": ["<article>", "<nav>", "<aside>", "<figure>"],
+    "answer": 1
+  },
+  {
+    "question": "Which selector is the usual place to declare global CSS custom properties?",
+    "options": [":root", ".wrapper", "#sidebar", "::after"],
+    "answer": 0
+  },
+  {
+    "question": "When should you prefer CSS Grid over Flexbox?",
+    "options": [
+      "When arranging content in only one row",
+      "When disabling responsiveness",
+      "When building a two-dimensional layout (rows and columns)",
+      "When styling text color only"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "How do you use a CSS custom property named --brand as a value?",
+    "options": [
+      "brand(--brand)",
+      "value(--brand)",
+      "variable(--brand)",
+      "var(--brand)"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "In client-side web pages, where does JavaScript from <script src=\"...\"> run?",
+    "options": [
+      "In the browser",
+      "Only in a database server",
+      "Inside DNS",
+      "Inside a CSS parser"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Why do many scripts wait for DOMContentLoaded?",
+    "options": [
+      "To make CSS files smaller",
+      "To ensure DOM elements exist before querying them",
+      "To disable browser caching",
+      "To force dark mode"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which method is safer for placing user-typed text into the page?",
+    "options": ["innerHTML", "outerHTML", "textContent", "document.write"],
+    "answer": 2
+  },
+  {
+    "question": "Which event gives continuous updates while typing in a text field or moving a slider?",
+    "options": ["click", "submit", "input", "load"],
+    "answer": 2
+  },
+  {
+    "question": "Compared to sessionStorage, localStorage typically ...",
+    "options": [
+      "Clears automatically when the tab closes",
+      "Persists until the user or code clears it",
+      "Cannot store string values",
+      "Only works with CSS files"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which model best describes beginner-friendly UI logic in this tutorial?",
+    "options": [
+      "Compile -> package -> deploy",
+      "DNS -> TCP -> TLS",
+      "Event -> state -> UI update",
+      "Class -> inheritance -> polymorphism"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which HTML attribute on a label associates it with an input element's id?",
+    "options": ["for", "name", "href", "src"],
+    "answer": 0
+  },
+  {
+    "question": "Why are semantic elements like <main>, <nav>, and <button> preferred?",
+    "options": [
+      "They reduce internet data usage automatically",
+      "They add built-in meaning and accessibility support",
+      "They force JavaScript modules to load faster",
+      "They replace the need for CSS"
+    ],
+    "answer": 1
+  }
+]

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI reflection log — Web Basics (CITS5505)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="reflection-page">
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-inner">
+      <a class="nav-logo" href="index.html">WEB<span>.</span>DEV</a>
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">[01] Tutorial</a></li>
+        <li><a class="nav-link" href="quiz.html">[02] Quiz</a></li>
+        <li><a class="nav-link active" href="reflection.html">[03] AI Log</a></li>
+        <li><a class="nav-link" href="cv.html">[04] CV</a></li>
+      </ul>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+        <span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-hero page-hero--ai page-hero--document">
+      <p class="page-hero-tag">CITS5505 · coursework reflection</p>
+      <h1 class="page-title">Artificial intelligence <span class="page-title-accent">reflection log</span></h1>
+      <p class="page-hero-sub">
+        Documented use of AI-assisted tools while building this site: prompts, model output, manual verification,
+        and known limitations.
+      </p>
+    </div>
+
+    <div class="reflection-body">
+    <div class="reflection-toc-shell">
+      <details class="reflection-toc-details" id="reflection-toc-details">
+        <summary class="reflection-toc-summary">Table of contents</summary>
+        <nav class="reflection-toc-panel" aria-label="Page sections">
+          <ol class="reflection-doc-toc">
+            <li><a href="#introduction"><span class="reflection-toc-text">Introduction</span></a></li>
+            <li><a href="#example-1"><span class="reflection-toc-text">Example 1 — Loading and rendering quiz questions</span></a></li>
+            <li><a href="#example-2"><span class="reflection-toc-text">Example 2 — Highlighting unanswered questions on submit</span></a></li>
+            <li><a href="#example-3"><span class="reflection-toc-text">Example 3 — <span class="reflection-toc-api">beforeunload</span> warning</span></a></li>
+            <li><a href="#example-4-api"><span class="reflection-toc-text">Example 4 — Pass reward via public API</span></a></li>
+            <li><a href="#limitation"><span class="reflection-toc-text">AI limitation (biased shuffle)</span></a></li>
+            <li><a href="#evaluation"><span class="reflection-toc-text">Critical evaluation</span></a></li>
+            <li><a href="#references-log"><span class="reflection-toc-text">References (Harvard style)</span></a></li>
+          </ol>
+        </nav>
+      </details>
+    </div>
+
+    <section class="log-section" id="introduction">
+      <h2>1. Introduction</h2>
+      <p>
+        While building this CITS5505 static site (tutorial page, JSON-driven quiz, and shared navigation),
+        I used <strong>Cursor</strong> for in-editor suggestions and refactors, and <strong>ChatGPT</strong> for
+        occasional longer explanations (for example, how <code>fetch</code> resolves paths and how
+        <code>localStorage</code> behaves across reloads). AI did not replace testing in the browser or
+        checking the Network tab when something failed silently.
+      </p>
+      <p>
+        Since the first draft, the tutorial page gained extra sections (HTTP, forms, DevTools), a table of
+        contents with smooth scrolling, a reading mode that hides chrome for long study sessions, and a
+        checklist whose ticks persist in <code>localStorage</code> under a dedicated key. The quiz bank grew to
+        fifteen questions so the AJAX shuffle and pass logic are exercised on a wider set of misconceptions,
+        not only the original three items.
+      </p>
+    </section>
+
+    <section class="log-section" id="example-1">
+      <h2>2. Example 1: Loading and rendering quiz questions</h2>
+      <h3>Prompt used</h3>
+      <div class="prompt-box">
+        “Write async JavaScript that fetches <code>data/questions.json</code>, stores the array in a variable,
+        shuffles question order, then renders each question with radio options into the element with id
+        <code>quiz-container</code>. Use one radio group per question named <code>q0</code>, <code>q1</code>, etc.”
+      </div>
+      <h3>Summary of AI output</h3>
+      <p>
+        The model produced a <code>loadQuestions()</code> function using <code>fetch</code> and
+        <code>response.json()</code>, then looped with <code>forEach</code> to create blocks of
+        <code>&lt;label&gt;</code> and <code>&lt;input type="radio"&gt;</code> tied to each question’s
+        <code>options</code> array and the correct <code>name</code> attributes. It also suggested a simple
+        shuffle helper.
+      </p>
+      <h3>Changes made to the code</h3>
+      <ul>
+        <li>
+          Kept the <code>fetch("data/questions.json")</code> path but verified it in a local server context
+          (opening the HTML file directly can break <code>fetch</code>); documented that for my own testing.
+        </li>
+        <li>
+          Aligned markup with the quiz page structure I already had: question blocks use classes such as
+          <code>quiz-card</code> and <code>quiz-question</code> so the same CSS applies to AI-generated DOM.
+        </li>
+        <li>
+          Replaced the suggested shuffle with a Fisher–Yates implementation (see Example 2 / limitation)
+          so order is not statistically biased.
+        </li>
+      </ul>
+      <h3>Decision and verification</h3>
+      <p>
+        <strong>Decision:</strong> I accepted the fetch-and-render structure but rejected the random
+        <code>sort</code> shuffle. <strong>Verification:</strong> I confirmed the Network tab returned JSON with
+        HTTP 200 and that each rendered question used a unique radio group name.
+      </p>
+      <pre class="code-block"><code>// Before (AI draft)
+questions.sort(() =&gt; Math.random() - 0.5);
+
+// After (implemented)
+const shuffled = fisherYatesShuffle(questions);</code></pre>
+    </section>
+
+    <section class="log-section" id="example-2">
+      <h2>3. Example 2: Highlighting unanswered questions on submit</h2>
+      <h3>Prompt used</h3>
+      <div class="prompt-box">
+        “On quiz submit, if any question has no selected radio, don’t score yet. Add a visible error state
+        to those question cards and scroll the first missing one into view.”
+      </div>
+      <h3>Summary of AI output</h3>
+      <p>
+        It recommended a CSS class (for example <code>quiz-unanswered</code>) with a red border and light
+        background, clearing that class before each validation pass. The script walks each question index,
+        checks <code>querySelector('input[name="q' + index + '"]:checked')</code>, toggles the class on the
+        parent card, and calls <code>scrollIntoView({ behavior: 'smooth', block: 'center' })</code> on the
+        first invalid card.
+      </p>
+      <h3>Changes made to the code</h3>
+      <ul>
+        <li>
+          Scoped selectors to the quiz container so the logic does not accidentally target radios elsewhere
+          on the page.
+        </li>
+        <li>
+          Used <code>classList.add</code> / <code>remove</code> in one place after submit, instead of mixing
+          inline <code>style.border</code> (easier to maintain next to the existing stylesheet rules).
+        </li>
+        <li>
+          Replaced a suggested <code>alert()</code> with an in-page message in <code>#results-section</code>
+          (<code>role="alert"</code>) so unanswered state is announced without blocking the UI; red card
+          outline remains the primary visual cue.
+        </li>
+      </ul>
+      <h3>Decision and verification</h3>
+      <p>
+        <strong>Decision:</strong> I accepted the unanswered-card pattern but rejected blocking
+        <code>alert()</code>. <strong>Verification:</strong> I tested with partially answered submissions and
+        confirmed that only missing cards were highlighted, the first missing question scrolled into view, and the
+        result message was announced in-page.
+      </p>
+      <pre class="code-block"><code>// Before (AI draft)
+alert("Please answer all questions");
+
+// After (implemented)
+resultsSection.innerHTML = '&lt;p class="quiz-error-msg" role="alert"&gt;Please answer every question...&lt;/p&gt;';</code></pre>
+    </section>
+
+    <section class="log-section" id="example-3">
+      <h2>4. Example 3: beforeunload warning</h2>
+      <h3>Prompt used</h3>
+      <div class="prompt-box">
+        “Add a <code>beforeunload</code> warning so if someone starts the quiz and then tries to close or
+        refresh the tab, the browser warns them they might lose their attempt.”
+      </div>
+      <h3>Summary of AI output</h3>
+      <p>
+        It suggested a boolean flag (for example <code>started</code>) set to <code>true</code> when the user
+        first interacts with the quiz (for example on <code>change</code> for a radio), plus
+        <code>window.addEventListener('beforeunload', …)</code> that calls <code>preventDefault()</code> and sets
+        <code>e.returnValue</code> to a non-empty string only when that flag is true, which triggers the native
+        confirmation dialog in supporting browsers.
+      </p>
+      <h3>Changes made to the code</h3>
+      <ul>
+        <li>
+          After a successful submit (all questions answered and scored), I set <code>started = false</code> so
+          leaving the page no longer shows the warning—without that, the flag stayed true and the prompt still
+          appeared even though the attempt was finished.
+        </li>
+        <li>
+          Left the listener registered globally but gated on the flag, rather than adding/removing listeners on
+          every interaction, to keep the flow simple and match the rest of the quiz script.
+        </li>
+      </ul>
+      <h3>Decision and verification</h3>
+      <p>
+        <strong>Decision:</strong> I accepted the guarded <code>beforeunload</code> design and refined lifecycle
+        handling after submit. <strong>Verification:</strong> I checked that refresh/navigation prompts appeared
+        only while the attempt was in progress and stopped after a successful submission.
+      </p>
+      <pre class="code-block"><code>// Before (AI draft idea)
+let started = false;
+
+// After (implemented behaviour)
+if (!submitted &amp;&amp; isDirty) {
+  e.preventDefault();
+  e.returnValue = "";
+}</code></pre>
+    </section>
+
+    <section class="log-section" id="example-4-api">
+      <h2>5. Example 4: Pass reward via public API</h2>
+      <h3>Prompt used</h3>
+      <div class="prompt-box">
+        “After a 70% pass, fetch a random quote with <code>fetch</code> from a public JSON API, validate the
+        response shape, and show quote text and author in the results area—no hard-coded inspirational strings.”
+      </div>
+      <h3>Summary of AI output</h3>
+      <p>
+        The model sketched a <code>fetch(url).then(r =&gt; r.json())</code> chain and suggested displaying
+        <code>data.content</code> and <code>data.author</code>. It did not always check HTTP status, Content-Type,
+        or reject oversized strings before inserting into the DOM.
+      </p>
+      <h3>Changes made to the code</h3>
+      <ul>
+        <li>
+          Moved the call into <code>js/api.js</code> as <code>QuizApi.fetchPassRewardQuote()</code>, with
+          <code>normaliseQuotePayload()</code> that requires a non-empty <code>content</code> string and caps
+          length before use (<code>escapeHtml</code> in <code>quiz.js</code> when rendering).
+        </li>
+        <li>
+          Reject non-JSON responses via the <code>Content-Type</code> header check; return <code>null</code> on
+          network errors so the quiz can show a transparent fallback message instead of a fake quote.
+        </li>
+      </ul>
+      <h3>Decision and verification</h3>
+      <p>
+        <strong>Decision:</strong> I accepted the API integration concept but rejected the unvalidated payload
+        assumption. <strong>Verification:</strong> I tested pass/fail paths and simulated API failure, confirming
+        real quotes render when valid and a non-fake fallback appears when responses are invalid.
+      </p>
+      <pre class="code-block"><code>// Before (AI draft)
+const data = await response.json();
+show(data.content, data.author);
+
+// After (implemented)
+if (!isValidQuotePayload(data)) return null;
+resultsSection.innerHTML += renderSafeQuote(data);</code></pre>
+    </section>
+
+    <section class="log-section" id="limitation">
+      <h2>6. AI limitation</h2>
+      <p>
+        <strong>Mistake:</strong> For shuffling, the first snippet suggested sorting with a random comparator:
+        <code>array.sort(() => Math.random() - 0.5)</code> (a pattern that still appears in some draft files).
+        That approach does not produce a uniformly random permutation; some orderings are more likely than others,
+        which is unfair for a quiz.
+      </p>
+      <p>
+        <strong>How I found it:</strong> I searched for “shuffle array javascript biased” after noticing odd
+        repeats when refreshing, then read MDN/community notes on why <code>sort</code> with random compare is
+        flawed. I also logged a few dozen shuffles and saw certain indices sticking near the top more often
+        than chance would suggest.
+      </p>
+      <p>
+        <strong>Fix:</strong> I implemented Fisher–Yates in the quiz script: copy the array, loop from the end,
+        swap with a random index at or below the current position. That matches the intended behaviour and
+        removed the bias.
+      </p>
+    </section>
+
+    <section class="log-section" id="evaluation">
+      <h2>7. Critical evaluation</h2>
+      <p>
+        <strong>Pros:</strong> AI sped up boilerplate (DOM loops, template strings for labels, repetitive CSS)
+        and reminded me of APIs I use infrequently, such as <code>scrollIntoView</code> options. It was useful
+        for structuring <code>try/catch</code> around <code>fetch</code> and for sketching the attempt-history
+        shape stored in <code>localStorage</code>.
+      </p>
+      <p>
+        <strong>Cons:</strong> Outputs often assume a single-file demo or a framework I am not using, so IDs,
+        paths, and where code runs (inline vs external script) need careful editing. The shuffle bug is a good
+        example of “looks correct” code that is still wrong under scrutiny.
+      </p>
+      <p>
+        <strong>Reliability and risks:</strong> Models can hallucinate library APIs or slightly wrong event names;
+        reliability is only as good as my verification in the browser and DevTools. Risks include copying
+        insecure patterns (for example embedding user input into <code>innerHTML</code> without escaping) or
+        over-trusting generated accessibility markup without testing with keyboard and screen reader basics.
+        For this project, treating AI as a draft assistant and owning the final test pass kept those risks
+        manageable.
+      </p>
+    </section>
+
+    <section class="log-section" id="references-log">
+      <h2>8. References for this log (<abbr title="The University of Western Australia">UWA</abbr> Harvard style)</h2>
+      <p>
+        The following sources support factual claims and tooling mentioned above. Web resources list author or
+        organisation, year, title, format, publisher, viewed date, and URL, following UWA Library Harvard
+        conventions for online documents.
+      </p>
+      <ol class="reflection-refs">
+        <li>Mozilla Corporation 2024, <cite>MDN Web Docs</cite>, online documentation, Mozilla, viewed 13 April 2026, <a href="https://developer.mozilla.org/en-US/">https://developer.mozilla.org/en-US/</a>.</li>
+        <li>OpenAI 2024, <cite>ChatGPT</cite>, large language model interface, OpenAI, viewed 13 April 2026, <a href="https://chat.openai.com/">https://chat.openai.com/</a>.</li>
+        <li>Cursor 2024, <cite>Cursor IDE</cite>, software application, Anysphere, viewed 13 April 2026, <a href="https://cursor.com/">https://cursor.com/</a>.</li>
+        <li>Quotable 2024, <cite>Quotable API</cite>, web API, viewed 13 April 2026, <a href="https://github.com/lukePeavey/quotable">https://github.com/lukePeavey/quotable</a> (random quote endpoint used for pass reward).</li>
+      </ol>
+    </section>
+    </div>
+  </main>
+
+  <script src="js/reflection.js"></script>
+</body>
+</html>

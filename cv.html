@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My CV - Web Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="cv-page">
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-inner">
+      <a class="nav-logo" href="index.html">WEB<span>.</span>DEV</a>
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">[01] Tutorial</a></li>
+        <li><a class="nav-link" href="quiz.html">[02] Quiz</a></li>
+        <li><a class="nav-link" href="reflection.html">[03] AI Log</a></li>
+        <li><a class="nav-link active" href="cv.html">[04] CV</a></li>
+      </ul>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+        <span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-hero--ai page-hero--document">
+    <p class="page-hero-tag">CITS5505 · curriculum vitae</p>
+    <h1 class="page-title">Professional <span class="page-title-accent">CV</span></h1>
+    <p class="page-hero-sub">
+      Snapshot of experience, skills, and project impact for software and web-focused roles.
+    </p>
+  </div>
+
+  <main class="cv-container cv-layout">
+    <aside class="cv-sidebar" aria-label="Profile summary">
+      <img src="assets/images/profile.png" alt="Profile photo placeholder" class="cv-profile-image" width="110" height="110">
+      <h1 class="cv-name">Atharva Dalvi</h1>
+      <p class="cv-role">Master of IT · Software Systems · UWA</p>
+
+      <div class="cv-sidebar-head">Contact</div>
+      <div class="cv-sidebar-contact-line">
+        <strong>Email</strong>
+        <a href="mailto:atharvadal7@gmail.com">atharvadal7@gmail.com</a>
+      </div>
+      <div class="cv-sidebar-contact-line">
+        <strong>LinkedIn</strong>
+        <a href="https://linkedin.com/in/atharvadalvi" target="_blank" rel="noopener noreferrer">linkedin.com/in/atharvadalvi</a>
+      </div>
+
+      <div class="cv-sidebar-head">Education</div>
+      <p class="cv-sidebar-edu"><span class="cv-edu-strong">Master of Information Technology</span> (Software Systems)<br>The University of Western Australia<br>Feb 2025 – Dec 2026</p>
+      <p class="cv-sidebar-edu"><span class="cv-edu-strong">Bachelor of Computer Applications</span><br>Amity University, Mumbai<br>Jun 2021 – Jul 2024</p>
+
+      <div class="cv-sidebar-head">Technical skills</div>
+      <div class="cv-skill-pills">
+        <span class="cv-skill-pill">Python</span>
+        <span class="cv-skill-pill">JavaScript</span>
+        <span class="cv-skill-pill">Java</span>
+        <span class="cv-skill-pill">SQL</span>
+        <span class="cv-skill-pill">HTML</span>
+        <span class="cv-skill-pill">CSS</span>
+        <span class="cv-skill-pill">Node.js</span>
+        <span class="cv-skill-pill">Express</span>
+        <span class="cv-skill-pill">PostgreSQL</span>
+        <span class="cv-skill-pill">MySQL</span>
+        <span class="cv-skill-pill">SQLite</span>
+        <span class="cv-skill-pill">Git</span>
+        <span class="cv-skill-pill">Docker</span>
+        <span class="cv-skill-pill">AWS</span>
+        <span class="cv-skill-pill">REST APIs</span>
+        <span class="cv-skill-pill">Three.js</span>
+        <span class="cv-skill-pill">WebGL</span>
+      </div>
+
+      <div class="cv-sidebar-head">Certifications</div>
+      <ul class="cv-sidebar-certs">
+        <li>
+          <a href="https://www.linkedin.com/learning/programming-foundations-data-structures-25191158" target="_blank" rel="noopener noreferrer">Programming Foundations: Data Structures</a> (2019)
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/learning/getting-started-as-a-full-stack-web-developer" target="_blank" rel="noopener noreferrer">Getting Started as a Full-Stack Web Developer</a>
+        </li>
+      </ul>
+    </aside>
+
+    <div class="cv-main">
+    <section class="cv-section" id="about">
+      <h2 class="cv-main-kicker">// About me</h2>
+      <p>
+        I am pursuing a Master of Information Technology at The University of Western Australia, specialising in Software Systems, after my Bachelors in Computer Applications from Amity University, Mumbai. My studies and project work explore how reliable web engineering, disciplined data handling, and thoughtful interfaces fit together in systems people rely on every week, from classroom exercises to production scale rollouts.
+      </p>
+      <p>
+        In industry I have contributed to immersive web experiences and data-centric products. At Makers Lab - Tech Mahindra, I interned on Union Bank of India’s “Uni-Verse” metaverse lounge—India’s first public-sector bank metaverse environment for retail and SME banking scenarios. I optimised more than 20 three-dimensional models and animations, measured rendering behaviour across browsers, and resolved numerous issues affecting WebGL performance, interaction logic, and UI responsiveness. As an assistant on the Atmanirbhar Krishi App, I supported integrations from government sources such as IMD, ISRO, and the Ministry of Agriculture, and helped shape a multilingual mobile experience that delivers soil and water insights at a usable cadence for farmers.
+      </p>
+      <p>
+        At Bharti Creations, I built web-based templates and automation for student and staff ID cards across educational institutions, reducing manual effort during bulk issuance and demonstrating how incremental automation changes day-to-day operations. Across these roles I track outcomes numerically—for example render-budget improvements near thirty percent or processing-time reductions near forty percent—because claims should be tied to evidence when collaborating with non-technical stakeholders.
+      </p>
+      <p>
+        Technically I am comfortable with Python, JavaScript, Java, SQL, HTML and CSS, Node.js and Express, PostgreSQL, MySQL, SQLite, Git, Docker on Linux, AWS, REST APIs, Three.js, and WebGL. I like pairing fundamentals with careful tooling choices, and I am mindful of internationalisation, accessibility basics, and performance because those qualities show up differently in field applications than in toy demos.
+      </p>
+      <p>
+        At UWA I am sharpening software architecture, automated testing habits, and ethical reasoning around data. I also reflect critically on AI-assisted development, using assistants as accelerators while verifying behaviour in browser DevTools rather than trusting snippets blindly. Colleagues describe me as calm under integration deadlines and explicit in documentation, including diagrams when state machines or data flows would otherwise stay implicit.
+      </p>
+      <p>
+        Career-wise I am drawn to teams that ship data-aware web products—whether in finance, agritech, spatial computing, or internal platforms—where maintainability and public trust compete for the same schedule. This portfolio project reinforces vanilla browser skills such as fetch-based loading, client-side persistence, and unobtrusive scripting, all of which remain relevant when debugging beneath frameworks or when constraints forbid heavy client dependencies.
+      </p>
+      <p>
+        Outside formal employment I continue structured learning through certifications in programming foundations and full-stack fundamentals, and I read MDN alongside primary documentation when APIs behave unexpectedly. I value transparent task breakdowns, reproducible environments, and commit messages that explain why a change exists as much as what it does. I also keep small personal utilities under version control so regressions are visible early. I welcome conversations with teams that combine engineering rigor with empathy for end users, because resilient software is as much a cultural habit as a technical one.
+      </p>
+    </section>
+
+    <section class="cv-section" id="experience">
+      <h2 class="cv-main-kicker">// Experience</h2>
+      <article class="experience-entry">
+        <h3 class="experience-title">Intern, Makers Lab — Tech Mahindra <span class="experience-meta">(Dec 2024 – Mar 2025)</span></h3>
+        <p class="experience-desc"><em>Project: Union Bank of India – Metaverse Virtual Lounge (&quot;Uni-Verse&quot;)</em></p>
+        <ul class="education-list">
+          <li>Contributed to the development of India&apos;s first Public Sector Bank Metaverse Lounge, designed to demonstrate retail and SME banking services in a virtual environment.</li>
+          <li>Designed and optimized 20+ 3D models and animations, reducing render load and improving WebGL performance by ~30% across browsers.</li>
+          <li>Conducted extensive debugging and performance testing, resolving 15+ issues related to rendering, interaction logic, and UI responsiveness.</li>
+        </ul>
+      </article>
+      <article class="experience-entry">
+        <h3 class="experience-title">Research Assistant, Makers Lab — Tech Mahindra <span class="experience-meta">(Aug 2024 – Nov 2024)</span></h3>
+        <p class="experience-desc"><em>Project: Atmanirbhar Krishi App</em></p>
+        <ul class="education-list">
+          <li>Contributed to the development of the Atmanirbhar Krishi App, empowering 140M+ farmers with smart farming solutions.</li>
+          <li>Worked on data integration from multiple government sources (IMD, ISRO, Ministry of Agriculture, etc.).</li>
+          <li>Assisted in designing a user-friendly mobile interface available in 12 Indian languages.</li>
+          <li>Helped implement features delivering real-time, personalised insights on soil health and water levels.</li>
+        </ul>
+      </article>
+      <article class="experience-entry">
+        <h3 class="experience-title">Intern, Bharti Creations <span class="experience-meta">(Jul 2022 – Oct 2022)</span></h3>
+        <ul class="education-list">
+          <li>Developed web-based templates and digital workflows for student and staff ID cards for educational institutions.</li>
+          <li>Automated portions of the data entry and card generation pipeline, reducing manual processing time by ~40% during bulk issuance.</li>
+          <li>Built tools to process 500+ records per batch for efficient generation and export of printable ID cards.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="cv-section" id="references">
+      <h2 class="cv-main-kicker">// References</h2>
+      <p class="experience-desc">
+        References follow the <abbr title="The University of Western Australia">UWA</abbr> Library’s Harvard style for web pages and software documentation (author or organisation, year, title, format, publisher, viewed date, URL).
+      </p>
+      <ol class="references-list uwa-refs">
+        <li>Mozilla Corporation 2024, <cite>MDN Web Docs</cite>, online documentation, Mozilla, viewed 13 April 2026, <a href="https://developer.mozilla.org/en-US/">https://developer.mozilla.org/en-US/</a>.</li>
+        <li>W3C 2024, <cite>HTML Living Standard</cite>, technical specification, WHATWG, viewed 13 April 2026, <a href="https://html.spec.whatwg.org/">https://html.spec.whatwg.org/</a>.</li>
+        <li>W3Schools 2024, <cite>HTML, CSS and JavaScript tutorials</cite>, online tutorials, Refsnes Data, viewed 13 April 2026, <a href="https://www.w3schools.com/">https://www.w3schools.com/</a>.</li>
+        <li>Quotable 2024, <cite>Quotable API</cite>, web API, viewed 13 April 2026, <a href="https://api.quotable.io/">https://api.quotable.io/</a> (random quote for quiz pass reward; response validated in <code>js/api.js</code>).</li>
+        <li>OpenAI 2024, <cite>ChatGPT</cite>, large language model interface, OpenAI, viewed 13 April 2026, <a href="https://chat.openai.com/">https://chat.openai.com/</a> (used for concept clarification; all integration decisions were verified manually).</li>
+        <li>Cursor 2024, <cite>Cursor IDE</cite>, software application, Anysphere, viewed 13 April 2026, <a href="https://cursor.com/">https://cursor.com/</a> (in-editor assistance for refactoring and boilerplate).</li>
+        <li>Stack Exchange Inc. 2024, <cite>Stack Overflow</cite>, online forum, Stack Exchange, viewed 13 April 2026, <a href="https://stackoverflow.com/">https://stackoverflow.com/</a>.</li>
+      </ol>
+    </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial - Web Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="main-page">
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-inner">
+      <a class="nav-logo" href="index.html">WEB<span>.</span>DEV</a>
+      <ul class="nav-list">
+        <li><a class="nav-link active" href="index.html">[01] Tutorial</a></li>
+        <li><a class="nav-link" href="quiz.html">[02] Quiz</a></li>
+        <li><a class="nav-link" href="reflection.html">[03] AI Log</a></li>
+        <li><a class="nav-link" href="cv.html">[04] CV</a></li>
+      </ul>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+        <span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="tutorial-container">
+    <header class="tutorial-hero">
+      <p class="page-hero-tag">// CITS5505 · Tutorial</p>
+      <h1 class="page-title tutorial-h1">Web basics <em>tutorial</em></h1>
+      <p class="tutorial-lead tutorial-hero-lead">
+        This tutorial is written for beginners and follows the same order real pages are built: first
+        <strong>HTML</strong> for meaning and accessibility, then <strong>CSS</strong> for layout and visual
+        design, then <strong>JavaScript</strong> for interaction. Each section explains both <em>what</em> a
+        concept does and <em>why</em> it matters when you build real interfaces, so you can move beyond memorising
+        definitions and start making good implementation decisions.
+      </p>
+    </header>
+
+    <div class="tutorial-content">
+    <div class="tutorial-toolbar">
+      <p class="tutorial-readout" id="tutorial-readout" aria-live="polite">
+        <span id="tutorial-read-time">Estimating read time…</span>
+        <span class="tutorial-readout-sep" aria-hidden="true">·</span>
+        <button type="button" id="readingModeBtn" class="toolbar-btn" aria-pressed="false">
+          Reading mode
+        </button>
+      </p>
+    </div>
+
+    <nav class="tutorial-toc" aria-label="On this page">
+      <span class="tutorial-toc-label">Jump to:</span>
+      <a href="#html-title">HTML</a>
+      <a href="#css-title">CSS</a>
+      <a href="#js-title">JavaScript</a>
+      <a href="#demo1-title">Click demo</a>
+      <a href="#demo2-title">Sandbox</a>
+      <a href="#checklist-title">Checklist</a>
+    </nav>
+
+    <p class="tutorial-roadmap" role="note">
+      <strong>How to use this page:</strong> read each section in order, run the demos, and tick the checklist
+      at the end. You will start with <strong>HTML</strong> and <strong>CSS</strong>, then move to
+      <strong>JavaScript</strong> and browser events. That sequence is deliberate: it mirrors how front-end work
+      usually happens in practice (structure first, presentation second, behaviour third), and it is the same
+      structure used by the quiz.
+    </p>
+
+    <section class="card tutorial-objectives" aria-labelledby="objectives-title">
+      <h2 class="section-title" id="objectives-title">Learning objectives (what you should be able to do)</h2>
+      <ul class="checklist">
+        <li><span class="checklist-row">Use semantic HTML elements and explain how they improve accessibility and maintainability.</span></li>
+        <li><span class="checklist-row">Build responsive CSS layouts with reusable tokens instead of one-off hard-coded values.</span></li>
+        <li><span class="checklist-row">Implement JavaScript interactions using the event -&gt; state -&gt; UI update model.</span></li>
+        <li><span class="checklist-row">Connect all three layers in one feature and explain why each layer belongs where it does.</span></li>
+      </ul>
+    </section>
+
+    <!-- HTML: semantics and accessibility -->
+    <section class="card section-html" aria-labelledby="html-title">
+      <h2 class="section-title" id="html-title">HTML Basics</h2>
+      <p class="section-desc">
+        <strong>What you will learn:</strong> think of HTML as the page's <strong>content blueprint</strong>. Good
+        HTML does more than make text appear:
+        it tells browsers and assistive technologies what each part means. For example, a real
+        <code>&lt;button&gt;</code> is focusable by keyboard, announces itself correctly to screen readers, and
+        responds to Enter/Space by default. A clickable <code>&lt;div&gt;</code> looks similar but misses those
+        built-in behaviours unless you re-implement them manually.
+      </p>
+      <p class="section-desc">
+        <strong>Why this matters in practice:</strong> semantic HTML saves debugging time later. Clear heading order,
+        labels tied to controls, and landmark elements such as <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>,
+        and <code>&lt;footer&gt;</code> make pages easier to navigate for both users and developers.
+      </p>
+      <p class="section-desc">
+        <strong>Common beginner mistake:</strong> choosing elements by appearance instead of meaning. A heading should
+        be a heading (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>), a control should be a control
+        (<code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>), and navigation links should sit in a
+        <code>&lt;nav&gt;</code>. If you start with semantic structure, CSS can style it later without breaking
+        accessibility.
+      </p>
+      <p class="section-desc">
+        <strong>Beginner boilerplate (copy to start):</strong> this is a minimal HTML page skeleton. It includes
+        encoding, responsive viewport, and links to your CSS and JavaScript files.
+      </p>
+      <p class="section-desc">
+        <strong>How to read it:</strong> <code>&lt;!DOCTYPE html&gt;</code> tells the browser to use modern HTML rules.
+        <code>&lt;head&gt;</code> stores page metadata (title, charset, viewport), while
+        <code>&lt;body&gt;</code> contains visible content. The <code>&lt;link&gt;</code> line loads your stylesheet,
+        and the <code>&lt;script&gt;</code> line loads your JavaScript file so behaviour can run after content exists.
+      </p>
+      <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My First Page&lt;/title&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, web!&lt;/h1&gt;
+  &lt;p&gt;I am learning HTML basics.&lt;/p&gt;
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <p class="section-desc" id="html-try">
+        <strong>Mini challenge (easy):</strong> click <strong>Try it Yourself</strong>, then make three tiny edits:
+        (1) change the heading text, (2) add one more label + input pair, and (3) change button text to
+        “Save profile”. Click <strong>Run</strong>. If you can see your new field and button label in the preview,
+        you have successfully edited real HTML.
+      </p>
+      <div class="tutorial-example-card">
+        <h3 class="tutorial-example-title">Example</h3>
+        <!-- Snippet: semantic controls + association by implicit label wrapping -->
+        <pre class="code-block tutorial-example-code"><code>&lt;main&gt;
+  &lt;h1&gt;Profile settings&lt;/h1&gt;
+
+  &lt;label for="displayName"&gt;Display name&lt;/label&gt;
+  &lt;input id="displayName" name="displayName" type="text"&gt;
+
+  &lt;button type="button"&gt;Save changes&lt;/button&gt;
+  &lt;p id="status" aria-live="polite"&gt;Ready.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+        <button type="button" class="tutorial-example-btn tutorial-example-btn--toggle" data-try-target="try-html-panel">Try it Yourself &raquo;</button>
+      </div>
+      <div class="tutorial-try-panel" id="try-html-panel" data-try-mode="html" hidden>
+        <label class="tutorial-try-label" for="tryHtmlEditor">Edit HTML</label>
+        <textarea id="tryHtmlEditor" class="tutorial-try-editor" spellcheck="false"><main>
+  <h1>Profile settings</h1>
+  <label for="displayName">Display name</label>
+  <input id="displayName" name="displayName" type="text" />
+  <button type="button">Save changes</button>
+  <p id="status" aria-live="polite">Ready.</p>
+</main></textarea>
+        <div class="tutorial-try-actions">
+          <button type="button" class="tutorial-try-run">Run</button>
+          <button type="button" class="tutorial-try-reset">Reset</button>
+        </div>
+        <iframe class="tutorial-try-frame" title="Try HTML output"></iframe>
+      </div>
+    </section>
+
+    <!-- CSS: separation of concerns and maintainability -->
+    <section class="card section-css" aria-labelledby="css-title">
+      <h2 class="section-title" id="css-title">CSS Basics</h2>
+      <p class="section-desc">
+        <strong>What you will learn:</strong> CSS controls <strong>how content looks and adapts</strong> across
+        screen sizes. A beginner-friendly way to write CSS is to use reusable tokens (custom properties) for color,
+        spacing, and typography. That avoids hard-coding random values in many places and makes global updates easier,
+        such as adding dark mode or adjusting spacing consistently.
+      </p>
+      <p class="section-desc">
+        <strong>Deeper decision-making:</strong> when choosing between <code>flex</code> and <code>grid</code>, ask
+        what layout problem you are solving. <code>flex</code> is often best for one-dimensional alignment (row or
+        column), while <code>grid</code> is better for two-dimensional page regions. This reasoning prevents
+        trial-and-error CSS and helps you design predictable layouts.
+      </p>
+      <p class="section-desc">
+        <strong>Practical workflow:</strong> define tokens in <code>:root</code>, build component styles with those
+        tokens, then add media queries for responsive behaviour. This keeps your CSS maintainable because design
+        decisions (like spacing or accent colour) are centralised instead of repeated.
+      </p>
+      <p class="section-desc">
+        <strong>Beginner boilerplate (copy to start):</strong> this stylesheet gives you basic readable defaults,
+        spacing tokens, and one button style so your page already looks structured.
+      </p>
+      <p class="section-desc">
+        <strong>How to read it:</strong> <code>:root</code> defines reusable variables (tokens) like colors and spacing.
+        The <code>body</code> rule sets global defaults (font, background, text color, outer spacing). The
+        <code>.btn</code> class styles a reusable button. This keeps your CSS clean because you can edit token values
+        once instead of updating every component manually.
+      </p>
+      <pre class="code-block"><code>:root {
+  --bg: #f8f9fb;
+  --text: #1f2937;
+  --accent: #2563eb;
+  --space-4: 16px;
+}
+
+body {
+  margin: 0;
+  padding: var(--space-4);
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.btn {
+  padding: 10px 14px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}</code></pre>
+      <p class="section-desc" id="css-try">
+        <strong>Mini challenge (easy):</strong> click <strong>Try it Yourself</strong>, then change just two values:
+        set <code>--accent</code> to another color and increase <code>--space-4</code> (for example from
+        <code>16px</code> to <code>24px</code>). Click <strong>Run</strong>. Replace the existing
+        <code>--accent</code> value (do not create a different variable name). If border color, heading color, and
+        accent chip color all change together, you have successfully styled a component with CSS tokens.
+      </p>
+      <div class="tutorial-example-card">
+        <h3 class="tutorial-example-title">Example</h3>
+        <!-- Snippet: variables + readable component styling -->
+        <pre class="code-block tutorial-example-code"><code>:root {
+  --space-4: 16px;
+  --radius: 10px;
+  --accent: #2563eb;
+}
+
+.card {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+}
+
+.card h2,
+.card h3 {
+  color: var(--accent);
+}
+
+.accent-chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.875rem;
+}
+
+.card-row {
+  display: flex;
+  gap: var(--space-4);
+}
+
+@media (max-width: 700px) {
+  .card-row { flex-direction: column; }
+}</code></pre>
+        <button type="button" class="tutorial-example-btn tutorial-example-btn--toggle" data-try-target="try-css-panel">Try it Yourself &raquo;</button>
+      </div>
+      <div class="tutorial-try-panel" id="try-css-panel" data-try-mode="css" hidden>
+        <label class="tutorial-try-label" for="tryCssEditor">Edit CSS</label>
+        <textarea id="tryCssEditor" class="tutorial-try-editor" spellcheck="false">:root {
+  --space-4: 16px;
+  --radius: 10px;
+  --accent: #2563eb;
+}
+
+.card {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+}
+
+.card h2,
+.card h3 {
+  color: var(--accent);
+}
+
+.accent-chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.875rem;
+}
+
+.card-row {
+  display: flex;
+  gap: var(--space-4);
+}
+
+@media (max-width: 700px) {
+  .card-row { flex-direction: column; }
+}</textarea>
+        <div class="tutorial-try-actions">
+          <button type="button" class="tutorial-try-run">Run</button>
+          <button type="button" class="tutorial-try-reset">Reset</button>
+        </div>
+        <iframe class="tutorial-try-frame" title="Try CSS output"></iframe>
+      </div>
+    </section>
+
+    <!-- JavaScript: events and DOM updates -->
+    <section class="card section-js" aria-labelledby="js-title">
+      <h2 class="section-title" id="js-title">JavaScript Basics</h2>
+      <p class="section-desc">
+        <strong>What you will learn:</strong> JavaScript adds <strong>behaviour</strong>: it reacts to user actions,
+        updates text, validates input, and coordinates UI state. A useful mental model is
+        <em>event -&gt; state -&gt; UI update</em>. First an event happens (click, input, submit), then your code
+        updates state (variables or storage), then the DOM reflects that state so users see the change.
+      </p>
+      <p class="section-desc">
+        <strong>Common beginner pitfall:</strong> waiting for <code>DOMContentLoaded</code> avoids reading elements
+        before they exist. This is a common beginner bug: code works sometimes because script timing is inconsistent.
+        Guarding element lookups with null checks also makes scripts robust when markup changes.
+      </p>
+      <p class="section-desc">
+        <strong>Safe update pattern:</strong> prefer <code>textContent</code> when inserting user input, keep state
+        in clearly named variables, and centralise rendering in one function. This pattern scales from tiny demos to
+        larger features because display logic stays in one place.
+      </p>
+      <p class="section-desc">
+        <strong>Beginner boilerplate (copy to start):</strong> this JavaScript pattern waits for the DOM, safely finds
+        elements, and updates text on click.
+      </p>
+      <p class="section-desc">
+        <strong>How to read it:</strong> <code>DOMContentLoaded</code> waits until HTML is parsed before running code.
+        <code>getElementById</code> grabs elements you want to control. The safety check
+        (<code>if (!btn || !out) return;</code>) prevents errors if IDs are missing. Finally,
+        <code>addEventListener('click', ...)</code> reacts to user interaction and updates the page with
+        <code>textContent</code>.
+      </p>
+      <pre class="code-block"><code>document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('helloBtn');
+  var out = document.getElementById('helloText');
+  if (!btn || !out) return;
+
+  btn.addEventListener('click', function () {
+    out.textContent = 'Great! Your JavaScript is working.';
+  });
+});</code></pre>
+      <p class="section-desc" id="js-try">
+        <strong>Mini challenge (very easy):</strong> skip code editing for now and use the live demo below. Scroll to
+        <strong>Interactive demo: click event</strong>, click <strong>Run click handler</strong>, and confirm the
+        sentence changes instantly. If the text updates without page reload, you have successfully run JavaScript in
+        the browser.
+      </p>
+      <div class="tutorial-example-card">
+        <h3 class="tutorial-example-title">Example</h3>
+        <!-- Snippet: guarded lookup + event listener -->
+        <pre class="code-block tutorial-example-code"><code>var demoBtn = document.getElementById('demoBtn');
+var demoText = document.getElementById('demoText');
+if (!demoBtn || !demoText) return;
+
+demoBtn.addEventListener('click', function () {
+  demoText.textContent = 'Button clicked — the DOM was updated without reloading the page.';
+});</code></pre>
+        <a class="tutorial-example-btn" href="#demo1-title">Try this in the click demo &raquo;</a>
+      </div>
+      <p class="section-desc">
+        <strong>Debugging habit:</strong> when behaviour fails, check three things in order: (1) did the event fire,
+        (2) did state change, (3) did render run. This sequence maps directly to the
+        event -&gt; state -&gt; UI model and helps you find bugs quickly without guessing.
+      </p>
+      <pre class="code-block"><code>// Lightweight trace while learning
+console.log('event: input fired');
+console.log('state:', state);
+console.log('ui:', preview.textContent);</code></pre>
+    </section>
+
+    <!-- Interactive Demo 1: discrete event -->
+    <section class="card interactive-demo" aria-labelledby="demo1-title">
+      <h2 class="section-title" id="demo1-title">Interactive demo: click event</h2>
+      <p id="demoText" class="demo-text">
+        <strong>Try this:</strong> this sentence is plain text in the DOM. Click the button to watch a simple event
+        handler update content
+        without reloading the page.
+      </p>
+      <button id="demoBtn" type="button" class="demo-btn">Run click handler</button>
+    </section>
+
+    <!-- Interactive Demo 2: continuous input (rubric: live CSS / DOM sandbox) -->
+    <section class="card sandbox-demo" aria-labelledby="demo2-title">
+      <h2 class="section-title" id="demo2-title">Interactive sandbox: live CSS and DOM text</h2>
+      <p class="section-desc">
+        <strong>Try this:</strong> this mini sandbox combines all three layers. HTML provides controls, CSS stores a
+        hue token, and
+        JavaScript listens to <code>input</code> events for instant feedback. The color slider updates a CSS
+        variable, while the text field updates a caption node.
+      </p>
+      <p class="section-desc">
+        Notice the security habit: typed text is written with <code>textContent</code> rather than
+        <code>innerHTML</code>. That prevents accidental HTML injection and is a good default for user-provided
+        text.
+      </p>
+      <p class="section-desc">
+        <strong>Extension idea:</strong> add a "Reset sandbox" button that sets slider and caption back to defaults.
+        This is a great beginner exercise because it reinforces DOM querying, event handlers, state reset, and
+        consistent re-rendering of the UI.
+      </p>
+      <div class="sandbox-layout">
+        <div class="sandbox-controls">
+          <label class="sandbox-label" for="sandboxHueSlider">Background hue (0–360)</label>
+          <input type="range" id="sandboxHueSlider" min="0" max="360" value="210">
+          <label class="sandbox-label" for="sandboxLabelInput">Caption text</label>
+          <input type="text" id="sandboxLabelInput" class="sandbox-text-input" maxlength="80" placeholder="Type a short label" value="Live preview">
+        </div>
+        <div id="sandboxBox" class="sandbox-box" style="--sandbox-hue: 210;">
+          <p id="sandboxLiveCaption" class="sandbox-caption"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checklist: localStorage -->
+    <section class="card study-checklist-card" aria-labelledby="checklist-title">
+      <h2 class="section-title" id="checklist-title">Study checklist</h2>
+      <p class="section-desc">
+        <strong>Use this for revision:</strong> tick topics as you finish them. Progress is saved in
+        <code>localStorage</code> under the key
+        <code>cits5505-tutorial-checklist</code>, so refreshing does not reset your study state.
+      </p>
+      <p class="section-desc">
+        This mirrors a real pattern used in many apps: persist small UI state locally for convenience, but keep
+        keys scoped and explicit so features do not overwrite each other.
+      </p>
+      <ul class="checklist" id="tutorialChecklist">
+        <li>
+          <label class="checklist-row">
+            <input type="checkbox" data-check-key="semantics">
+            <span>I can explain why semantic HTML matters for accessibility.</span>
+          </label>
+        </li>
+        <li>
+          <label class="checklist-row">
+            <input type="checkbox" data-check-key="css-vars">
+            <span>I can use CSS custom properties for colours and spacing.</span>
+          </label>
+        </li>
+        <li>
+          <label class="checklist-row">
+            <input type="checkbox" data-check-key="dom-events">
+            <span>I can wire <code>DOMContentLoaded</code> and click handlers safely.</span>
+          </label>
+        </li>
+        <li>
+          <label class="checklist-row">
+            <input type="checkbox" data-check-key="js-safe-text">
+            <span>I can explain why <code>textContent</code> is safer than <code>innerHTML</code> for user input.</span>
+          </label>
+        </li>
+        <li>
+          <label class="checklist-row">
+            <input type="checkbox" data-check-key="layer-integration">
+            <span>I can connect HTML structure, CSS styling, and JavaScript behaviour in one feature.</span>
+          </label>
+        </li>
+      </ul>
+      <button type="button" id="checklistResetBtn" class="checklist-reset-btn">Clear saved checklist</button>
+    </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-next">
+      <strong>CITS5505 — Next step:</strong> open the timed quiz to test your HTML, CSS, and JavaScript fundamentals.
+    </p>
+    <a href="quiz.html" class="btn-go-quiz" aria-label="Go to the Web Basics quiz page (quiz.html)">Go to Web Basics Quiz →</a>
+  </footer>
+
+  <script src="js/tutorial.js"></script>
+</body>
+</html>

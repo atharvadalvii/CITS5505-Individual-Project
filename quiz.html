@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz - Web Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="quiz-page">
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="navbar-inner">
+      <a class="nav-logo" href="index.html">WEB<span>.</span>DEV</a>
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">[01] Tutorial</a></li>
+        <li><a class="nav-link active" href="quiz.html">[02] Quiz</a></li>
+        <li><a class="nav-link" href="reflection.html">[03] AI Log</a></li>
+        <li><a class="nav-link" href="cv.html">[04] CV</a></li>
+      </ul>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+        <span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="quiz-hero">
+      <p class="page-hero-tag">// CITS5505 · Quiz</p>
+      <h1 class="page-title quiz-page-title">Web basics <span class="quiz-title-accent">quiz</span></h1>
+    </div>
+
+    <div class="quiz-body">
+    <div id="quiz-session-banner" class="quiz-session-banner" role="status" aria-live="polite" hidden></div>
+    <aside class="quiz-info" aria-label="Quiz rules">
+      <p>
+        There are <strong>15</strong> multiple-choice questions loaded with <strong>AJAX</strong> from
+        <code>data/questions.json</code> (they are not embedded in this HTML file). Topics include HTML, CSS,
+        and JavaScript fundamentals from the tutorial: semantic elements, CSS variables/layout decisions, DOM
+        events, safe text updates, and browser storage basics.
+        The order is <strong>randomised on every page load</strong> using a Fisher–Yates shuffle.
+      </p>
+      <p>
+        <strong>Pass mark: 70%</strong> (inclusive). Your score, percentage, and pass/fail status appear below after you submit.
+        If you pass, a <strong>bonus quote</strong> is fetched from a public API (never hard-coded in the source).
+      </p>
+      <p>
+        After you select your <strong>first answer</strong>, the page treats the quiz as in progress: you get a native
+        <strong>beforeunload</strong> prompt if you try to refresh, close the tab, or follow a link to another page.
+        Switching to another tab does not show that prompt (browsers do not allow it), but when you return you may see a short reminder here.
+        The prompt and reminder stop after a <strong>successful</strong> submission.
+      </p>
+    </aside>
+
+    <div id="quiz-container"></div>
+    <button type="button" id="quiz-submit" class="quiz-submit-btn">Submit Quiz</button>
+
+    <div id="results-section" class="quiz-results-region" role="region" aria-label="Quiz results" aria-live="polite"></div>
+
+    <section class="attempt-history-section" aria-labelledby="attempts-heading">
+      <div class="attempt-toolbar">
+        <h2 id="attempts-heading" class="attempt-history-heading">Previous attempts</h2>
+        <button type="button" id="clear-history-btn" class="clear-history-btn">Clear history</button>
+      </div>
+      <div id="attempt-history"></div>
+    </section>
+    </div>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/quiz.js"></script>
+
+</body>
+</html>
